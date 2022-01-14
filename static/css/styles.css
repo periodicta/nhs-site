@@ -30,3 +30,10 @@ a{
     color:grey;
     font-weight:600;
 }
+input{
+    color:white;
+    background-color:black;
+}
+input::placeholder{
+    color:grey;
+}
