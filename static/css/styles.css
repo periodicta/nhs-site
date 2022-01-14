@@ -33,6 +33,12 @@ a{
 input{
     color:white;
     background-color:black;
+    border-style:none;
+    margin:15px;
+    border-radius:15px;
+    padding:20px;
+    width:400px;
+    outline:none;
 }
 input::placeholder{
     color:grey;
