@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 body{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url("https://d13b2ieg84qqce.cloudfront.net/8c509749cc359d727805224245d896a80b9d4d58.jpg") !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url("https://www.highmarkschools.com/wp-content/uploads/photo-gallery/imported_from_media_libray/CA-BINS-Silicon-Valley-02.jpg?bwg=1562825079") !important;
     background: no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -8,4 +8,9 @@ body{
     background-size: cover;
     color: white;
     font-family: 'Lato', sans-serif;
+}
+a{
+    color:orange;
+    font-weight:800;
+    text-decoration: none;
 }
