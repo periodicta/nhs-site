@@ -18,11 +18,15 @@ a{
 #navbar{
     background-color:rgba(0,0,0,0.5);
     padding-top:20px;
-    padding-bottom:20px;
+    padding-bottom:40px;
     top:0px;
 }
 
 .navelement{
     color:white;
     margin:10px;
+}
+.navelement:hover{
+    color:grey;
+    font-weight:600;
 }
