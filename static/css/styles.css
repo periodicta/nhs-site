@@ -32,13 +32,19 @@ a{
 }
 input{
     color:white;
-    background-color:black;
+    background-color:rgba(0,0,0,0.7);
     border-style:none;
     margin:15px;
     border-radius:15px;
     padding:20px;
     width:400px;
     outline:none;
+    font-size:1.5em;
+}
+input[type=submit]{
+    background:orange;
+    color:bl1ack;
+    width:200px;
 }
 input::placeholder{
     color:grey;
