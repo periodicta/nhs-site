@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 body{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url("https://www.highmarkschools.com/wp-content/uploads/photo-gallery/imported_from_media_libray/CA-BINS-Silicon-Valley-02.jpg?bwg=1562825079") !important;
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url("https://www.highmarkschools.com/wp-content/uploads/photo-gallery/imported_from_media_libray/CA-BINS-Silicon-Valley-02.jpg?bwg=1562825079") !important; */
     background: no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -10,7 +10,63 @@ body{
     font-family: 'Lato', sans-serif;
     margin: 0;
 }
-a{
+
+.navigationElement {
+    font-size: 1.3em;
+}
+.homePage1 {
+    background-color: lightcyan;
+}
+@media (min-width: 768px) {
+    .animate {
+      animation-duration: 0.3s;
+      -webkit-animation-duration: 0.3s;
+      animation-fill-mode: both;
+      -webkit-animation-fill-mode: both;
+    }
+  }
+  
+@keyframes slideIn {
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0rem);
+      opacity: 1;
+    }
+  
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+  
+  @-webkit-keyframes slideIn {
+    0% {
+      -webkit-transform: transform;
+      -webkit-opacity: 0;
+    }
+  
+    100% {
+      -webkit-transform: translateY(0);
+      -webkit-opacity: 1;
+    }
+  
+    0% {
+      -webkit-transform: translateY(1rem);
+      -webkit-opacity: 0;
+    }
+  }
+  
+  .slideIn {
+    -webkit-animation-name: slideIn;
+    animation-name: slideIn;
+  }
+
+
+/* a{
     color:orange;
     font-weight:800;
     text-decoration: none;
@@ -22,14 +78,6 @@ a{
     top:0px;
 }
 
-.navelement{
-    color:white;
-    margin:10px;
-}
-.navelement:hover{
-    color:grey;
-    font-weight:600;
-}
 input{
     color:white;
     background-color:rgba(0,0,0,0.7);
@@ -43,9 +91,9 @@ input{
 }
 input[type=submit]{
     background:orange;
-    color:bl1ack;
+    color:black;
     width:200px;
 }
 input::placeholder{
     color:grey;
-}
+} */
