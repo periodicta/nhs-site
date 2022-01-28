@@ -17,12 +17,12 @@ def login():
     return render_template("login.html")
 @app.route("/login", methods=["POST"])
 def loginpost():
-    user = request.get("e")
-    password = request.get("p")
+    user = request.form["e"]
+    password = request.form["p"]
     from schoology import checkLogin
     response = checkLogin(user, password)
     try:
-        if response[0] == "error":
+        if response == "error":
             return "error!!!"
     except Exception as t:
         t = t

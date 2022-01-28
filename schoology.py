@@ -81,7 +81,7 @@ class BasisScraper(Scraper):
         if len(resp.cookies) == 0:
             self.progress = 0
             print(json_format(False, "Incorrect login details."))
-            sys.exit()
+            return False
 
         return True
 
@@ -134,12 +134,11 @@ class BasisScraper(Scraper):
 
 
 def checkLogin(user, password):
-
-        user = sys.argv[1].lower()
-        password = sys.argv[2].lower().strip()
         bs = BasisScraper()
         try:
             if bs.login(user, password):
                 return bs.get_present()
+            else:
+                return "error"
         except requests.Timeout:
-            return ["error"]
+            return "error"
