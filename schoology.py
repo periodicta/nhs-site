@@ -134,6 +134,7 @@ class BasisScraper(Scraper):
 
 
 def checkLogin(user, password):
+
         user = sys.argv[1].lower()
         password = sys.argv[2].lower().strip()
         bs = BasisScraper()

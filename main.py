@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask('app')
 @app.route("/")
 def home():
@@ -15,4 +15,17 @@ def njhs_hour_tracker():
 @app.route("/login")
 def login():
     return render_template("login.html")
+@app.route("/login", methods=["POST"])
+def loginpost():
+    user = request.get("e")
+    password = request.get("p")
+    from schoology import checkLogin
+    response = checkLogin(user, password)
+    try:
+        if response[0] == "error":
+            return "error!!!"
+    except Exception as t:
+        t = t
+
+    return t["name_display"]
 app.run(host='0.0.0.0', port=8080)
