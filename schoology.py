@@ -131,6 +131,7 @@ class BasisScraper(Scraper):
                 data = olddata["users"]["search_result"][i]
                 uid = data["uid"]
                 data = sc.get_user(uid).json()
+                data = json.dumps(data)
                 print(data)
                 if data["primary_email"] == user:
                     return data["display_name"]
