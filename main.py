@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect
 app = Flask('app')
 @app.route("/")
 def home():
-    return render_template("index.html")
+    try:
+        user = session["name"]
+    except:
+        user = None
+
+    return render_template("index.html", user=user)
 @app.route("/njhs")
 def njhs():
     return render_template("njhs.html")
@@ -14,7 +19,12 @@ def njhs_hour_tracker():
     return render_template("njhshourtracker.html")
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    try:
+        a = (session["name"]+session["email"])
+    except:
+        return render_template("login.html")
+
+    return redirect("/")
 @app.route("/login", methods=["POST"])
 def loginpost():
     user = request.form["e"]
@@ -26,6 +36,8 @@ def loginpost():
             return "error!!!"
     except Exception as t:
         t = t
+    session["email"] = user
+    session["name"] = response
 
     return str(response)
 app.run(host='0.0.0.0', port=8080)
