@@ -27,5 +27,5 @@ def loginpost():
     except Exception as t:
         t = t
 
-    return response["name_display"]
+    return str(response)
 app.run(host='0.0.0.0', port=8080)

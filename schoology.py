@@ -120,16 +120,22 @@ class BasisScraper(Scraper):
                    'Host': 'api.schoology.com',
                    'Content-Type': 'application/json',
                    'Authorization': auth}
-
-        data = requests.get(f'https://api.schoology.com/v1/search?keywords={user}&type=user&limit=5', headers=headers)
+        name = user
+        name = name.replace("@basisindependent.com","")
+        name = name.split("_")[0]
+        data = requests.get(f'https://api.schoology.com/v1/search?keywords={name}&type=user&limit=5', headers=headers)
         data.raise_for_status()
         try:
-            data = data.json()
-            data = data["users"]["search_result"][0]
-            uid = data["uid"]
-            data = sc.get_user(uid)
+            olddata = data.json()
+            for i in range(0, len(olddata)):
+                data = olddata["users"]["search_result"][i]
+                uid = data["uid"]
+                data = sc.get_user(uid)
+                print(data)
+                if data["email"] == user:
+                    return data["display_name"]
 
-            return data
+            return "No Results"
         except:
             return "No Results"
 
