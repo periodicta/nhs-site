@@ -98,22 +98,25 @@ body{
     top:0px;
 }
 
+*/
 input{
-    color:white;
-    background-color:rgba(0,0,0,0.7);
+    color:black;
+    background-color:white;
     border-style:none;
     margin:15px;
     border-radius:15px;
     padding:20px;
     width:400px;
     outline:none;
-    font-size:1.5em;
 }
 input[type=submit]{
     background:orange;
     color:black;
     width:200px;
 }
+input[type=submit]:hover{
+    background:yellow;
+}
 input::placeholder{
     color:grey;
-} */
+}
