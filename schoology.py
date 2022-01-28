@@ -127,14 +127,13 @@ class BasisScraper(Scraper):
         data.raise_for_status()
         try:
             olddata = data.json()
-            for i in range(0, len(olddata)):
+            for i in range(0, len(olddata["users"]["search_result"])):
                 data = olddata["users"]["search_result"][i]
                 uid = data["uid"]
-                data = sc.get_user(uid).json()
-                data = json.dumps(data)
-                print(data)
+                data = sc.get_user(uid)
+
                 if data["primary_email"] == user:
-                    return data["display_name"]
+                    return data["name_display"]
 
             return "No Results"
         except Exception as e:
