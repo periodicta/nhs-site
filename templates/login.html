@@ -11,7 +11,7 @@
         <h1>Login with Schoology</h1>
         <input type="email" placeholder="Email" id="e"><br><br>
         <input type="password" placeholder="Password" id="p"><br><br>
-        <input type="submit" value="Log In" onclick = "checkInfo()">
+        <input type="submit" value="Log In" onclick = "checkInfo()"><br><br>
         <span id="resp"></span>
     </div>
 <script>
@@ -30,10 +30,10 @@
             resp = document.getElementById("resp")
             if (data==="error!!!"){
                 resp.style.color = "red";
-                resp.style.innerHTML = "Invalid Credentials"
+                resp.innerHTML = "Invalid Credentials"
             }else{
                 resp.style.color = "green";
-                resp.style.innerHTML = "Welcome, "+data;
+                resp.innerHTML = "Welcome, "+data;
             }
 
         });

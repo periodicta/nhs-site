@@ -85,7 +85,7 @@ class BasisScraper(Scraper):
 
         return True
 
-    def get_present(self):
+    def get_present(self, user):
         url = "https://app.schoology.com/courses/courses"
 
         headers = {
@@ -103,10 +103,11 @@ class BasisScraper(Scraper):
         import schoolopy
         import os
         import time, random
-        sc = schoolopy.Schoology(schoolopy.Auth(os.environ['KEY'], os.environ['SECRET']))
-        sc.limit = 10
         consumer_key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
         consumer_secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+        sc = schoolopy.Schoology(schoolopy.Auth(consumer_key, consumer_secret))
+        sc.limit = 10
+
         auth = 'OAuth realm="Schoology API",'
         auth += 'oauth_consumer_key="%s",' % consumer_key
         auth += 'oauth_token="%s",' % ('')
@@ -137,7 +138,7 @@ def checkLogin(user, password):
         bs = BasisScraper()
         try:
             if bs.login(user, password):
-                return bs.get_present()
+                return bs.get_present(user)
             else:
                 return "error"
         except requests.Timeout:
