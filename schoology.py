@@ -100,169 +100,45 @@ class BasisScraper(Scraper):
         }
 
         resp = self.session.post(url, headers=headers)
-        self.progress = 20
-        self.message = 'Searching for courses...'
+        import schoolopy
+        import os
+        import time, random
+        sc = schoolopy.Schoology(schoolopy.Auth(os.environ['KEY'], os.environ['SECRET']))
+        sc.limit = 10
+        consumer_key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+        consumer_secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+        auth = 'OAuth realm="Schoology API",'
+        auth += 'oauth_consumer_key="%s",' % consumer_key
+        auth += 'oauth_token="%s",' % ('')
+        auth += 'oauth_nonce="%s",' % ''.join([str(random.randint(0, 9)) for i in range(8)])
+        auth += 'oauth_timestamp="%d",' % time.time()
+        auth += 'oauth_signature_method="PLAINTEXT",'
+        auth += 'oauth_version="1.0",'
+        auth += 'oauth_signature="%s%%26%s"' % (consumer_secret, '')
+        headers = {'Accept': 'application/json',
+                   'Host': 'api.schoology.com',
+                   'Content-Type': 'application/json',
+                   'Authorization': auth}
 
-        soup = bS(resp.text, 'html.parser')
+        data = requests.get(f'https://api.schoology.com/v1/search?keywords={user}&type=user&limit=5', headers=headers)
+        data.raise_for_status()
+        try:
+            data = data.json()
+            data = data["users"]["search_result"][0]
+            uid = data["uid"]
+            data = sc.get_user(uid)
 
-        classes = soup.find_all('li', class_="course-item")
-
-        total_course_count = len(classes)
-        scraped_course_count = 0
-        initial_progress = self.progress
-        max_progress = 100
-        with open("status.txt", "w") as out:
-            print("Syncing Course " + str(scraped_course_count + 1) + " of " + str(total_course_count) + " courses.",
-                  file=out)
-        self.message = 'Synced ' + str(scraped_course_count) + ' of ' + str(total_course_count) + ' courses...'
-        self.progress = initial_progress + (max_progress - initial_progress) * scraped_course_count / total_course_count
-        data = []
-        for class_ in classes:
-            datasub = []
-            with open("status.txt", "w") as out:
-                print(
-                    "Syncing Course " + str(scraped_course_count + 1) + " of " + str(total_course_count) + " courses.",
-                    file=out)
-            self.message = 'Synced ' + str(scraped_course_count) + ' of ' + str(total_course_count) + ' courses...'
-            self.progress = initial_progress + (
-                        max_progress - initial_progress) * scraped_course_count / total_course_count
-            class_name = str(class_.find('span', class_='course-title').get_text())
-
-            if "office" in class_name.lower() or "lunch" in class_name.lower():
-                total_course_count -= 1
-                continue
-
-            section = str(class_.find('div', class_='section-item').get_text())
-
-            link = str(class_.find('a').get('href'))
-
-            scraped_course_count += 1
-            datasub.append(class_name)
-            datasub.append(section)
-            datasub.append(link)
-            import time
-            time.sleep(0.35)  # prevent requests
-            url = f"https://app.schoology.com{link}/materials?list_filter=assignments&ajax=1&style=full"
-
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-                'Accept-Encoding': 'gzip, deflate, br',
-                'Accept-Language': 'en-US,en;q=0.9',
-                'Cache-Control': 'max-age=0',
-                'Connection': 'keep-alive',
-                'referer': 'https://app.schoology.com/login?destination=courses/courses',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36 Edg/94.0.992.31',
-            }
-
-            resp = self.session.post(url, headers=headers)
-            newsoup = str(bS(resp.text, 'html.parser'))
-            newsoup = newsoup.replace("\\u003C", "<").replace('\\u0022', '"').replace('\\u003E', '>').replace("\\u0027",
-                                                                                                              "'").replace(
-                "\\u00a0", " ").replace("\\u0026", "&").replace("\\u201c", "“").replace("\\u2019s", "’").replace(
-                "\\u201d", "”").replace("\\u00e9", "é").replace("\\u2026", "…").replace("\\u2013", "-").replace("\\n",
-                                                                                                                "").replace(
-                "\\", "");
-
-            with open('temp.html', 'w') as out:
-                print(newsoup, file=out)
-            with open("temp.html") as fp:
-                newsoup = bS(fp, 'html.parser')
-            assignments_ = newsoup.find_all('div', "s-common-block has-control control-small has-media media-small")
-            assignments = []
-            for assignment in assignments_:
-                datasubsub = []
-                try:
-                    folder = str(assignment.find('span', class_='infotip-content').get_text())
-                except:
-                    folder = ''
-                datasubsub.append(folder)
-                name = str(assignment.find('div', class_='s-common-block_title').get_text())
-
-                datasubsub.append(name)
-                description = assignment.find('div', class_='s-common-block_copy')
-                if description == None:
-                    description = ''
-                else:
-                    description = str(description.get_text())
-                datasubsub.append(description)
-                newlink = str(assignment.find('div', class_='s-common-block_title')).replace(
-                    '<div class="s-common-block_title">', '').replace('</div', '').strip("<a href=\"")
-                time.sleep(0.35)
-                a = newlink.index('"')
-                newlink = newlink[0:a]
-                datasubsub.append(newlink)
-                url = "https://app.schoology.com" + newlink
-
-                headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-                    'Accept-Encoding': 'gzip, deflate, br',
-                    'Accept-Language': 'en-US,en;q=0.9',
-                    'Cache-Control': 'max-age=0',
-                    'Connection': 'keep-alive',
-                    'referer': 'https://app.schoology.com/login?destination=courses/courses',
-                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36 Edg/94.0.992.31',
-                }
-
-                resp = self.session.post(url, headers=headers)
-                newnewsoup = bS(resp.text, 'html.parser')
-                due = str(newnewsoup.find('p', class_='due-date'))
-                grade = str(newnewsoup.find('div', class_='grading-grade'))
-                datasubsub.append(str(due))
-                datasubsub.append(str(grade))
-                assignments.append(datasubsub)
-            datasub.append(assignments)
-            url = f"https://app.schoology.com{link}/members"
-
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-                'Accept-Encoding': 'gzip, deflate, br',
-                'Accept-Language': 'en-US,en;q=0.9',
-                'Cache-Control': 'max-age=0',
-                'Connection': 'keep-alive',
-                'referer': 'https://app.schoology.com/login?destination=courses/courses',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36 Edg/94.0.992.31',
-            }
-
-            resp = self.session.post(url, headers=headers)
-            newnewsoup = bS(resp.text, 'html.parser')
-            # try:
-            #   membercount = int(str(newnewsoup.find('span',class_="total").get_text)
-            # except Exception as e::
-            #   print("Error")
-            #   membercount = 0
-            members = []
-            members_ = newnewsoup.find_all('class', class_="enrollment-admin")
-            for member in members_:
-                members.append([True,
-                                member.find('class', 'user-name').replace('<td class="user-name">', '').replace('<b>',
-                                                                                                                '').replace(
-                                    '</b>', '').replace('</span></div></td>', ''),
-                                member.find('class', 'user-picture')])
-            members_ = newnewsoup.find_all('class', class_="enrollment-member")
-            for member in members_:
-                members.append([False, member.find('class', 'user-name'), member.find('class', 'user-picture')])
-            # datasub.append(membercount)
-            datasub.append(members)
-            data.append(datasub)
-
-        with open("main.json", "w") as out:
-            json.dump(data, out, indent=4)
+            return data
+        except:
+            return "No Results"
 
 
-if __name__ == "__main__":
-    school = "basis"
-    if school == "basis":
+def checkLogin(user, password):
         user = sys.argv[1].lower()
         password = sys.argv[2].lower().strip()
         bs = BasisScraper()
         try:
             if bs.login(user, password):
-                bs.get_present()
+                return bs.get_present()
         except requests.Timeout:
-            print(json_format(False, "Could not connect to Schoology."))
-        # except Exception as e:
-        #   # Error when something in PowerSchool breaks scraper
-        #   print(json_format(False, f"An Unknown Error occurred. Contact support.  Error {e}"))
+            return ["error"]
