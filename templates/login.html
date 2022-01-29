@@ -16,13 +16,14 @@
         <input type="password" placeholder="Password" id="p"><br><br>
         <p>What Grade are you in?</p><br>
         <input type="number" placeholder="Grade Level" min = "6" max="11"><br><br>
-        <input type="submit"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please Wait..."  value="Log In" onclick = "checkInfo(this)"><br><br>
+        <input type="submit"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please Wait..."  value="Log In" id="loginbtn"><br><br>
 
         <span id="resp"></span>
     </div>
 <script>
 
-    function checkInfo(this){
+
+        $('.loginbtn').on('click', function() {
         email = document.getElementById("e").value;
         password = document.getElementById("p").value;
         var $this = $(this);
@@ -54,7 +55,7 @@
           }, 1000);
 
 
-    }
+    });
 </script>
 
 </body>
