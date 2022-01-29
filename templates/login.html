@@ -7,18 +7,29 @@
 </head>
 <body>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <div style="text-align:center;">
         <h1>Login with Schoology</h1>
         <input type="email" placeholder="Email" id="e"><br><br>
         <input type="password" placeholder="Password" id="p"><br><br>
-        <input type="submit" value="Log In" onclick = "checkInfo()"><br><br>
+        <p>What Grade are you in?</p><br>
+        <input type="number" placeholder="Grade Level" min = "6" max="11"><br><br>
+        <input type="submit"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please Wait..."  value="Log In" onclick = "checkInfo(this)"><br><br>
+
         <span id="resp"></span>
     </div>
 <script>
-    function checkInfo(){
+
+    function checkInfo(this){
         email = document.getElementById("e").value;
         password = document.getElementById("p").value;
-        var request =  $.ajax({
+        var $this = $(this);
+        $this.button('loading');
+        setTimeout(function() {
+
+          var request =  $.ajax({
               type: "POST",
               url: "/login",
               data: {
@@ -38,6 +49,11 @@
             }
 
         });
+          $this.button('reset');
+
+          }, 1000);
+
+
     }
 </script>
 
