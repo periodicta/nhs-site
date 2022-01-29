@@ -132,7 +132,7 @@ class BasisScraper(Scraper):
                 uid = data["uid"]
                 data = sc.get_user(uid)
 
-                if data["primary_email"] == user:
+                if data["primary_email"].lower() == user.lower():
                     return data["name_display"]
 
             return f"No Results [Error: COUDNT FIND THE PERSON!]"
