@@ -19,6 +19,8 @@ def hour_tracker():
 @app.route("/njhs/hour-tracker")
 def njhs_hour_tracker():
     return render_template("njhshourtracker.html")
+
+
 @app.route("/login")
 def login():
     try:
@@ -27,6 +29,8 @@ def login():
         return render_template("login.html")
 
     return redirect("/")
+
+
 @app.route("/login", methods=["POST"])
 def loginpost():
     user = request.form["e"]
@@ -40,6 +44,6 @@ def loginpost():
         t = t
     session["email"] = user
     session["name"] = response
-
     return str(response)
+
 app.run(host='0.0.0.0', port=8080)
