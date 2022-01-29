@@ -123,7 +123,7 @@ class BasisScraper(Scraper):
         name = user
         name = name.replace("@basisindependent.com","")
         name = name.split("_")[0]
-        data = requests.get(f'https://api.schoology.com/v1/search?keywords={name}&type=user&limit=5', headers=headers)
+        data = requests.get(f'https://api.schoology.com/v1/search?keywords={name}&type=user&limit=30', headers=headers)
         data.raise_for_status()
         try:
             olddata = data.json()
@@ -135,10 +135,10 @@ class BasisScraper(Scraper):
                 if data["primary_email"] == user:
                     return data["name_display"]
 
-            return "No Results"
+            return f"No Results [Error: COUDNT FIND THE PERSON!]"
         except Exception as e:
             print(e)
-            return "No Results"
+            return f"No Results [Error: {str(e)}]"
 
 
 def checkLogin(user, password):
