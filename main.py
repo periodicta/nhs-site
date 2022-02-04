@@ -20,7 +20,9 @@ def hour_tracker():
 def njhs_hour_tracker():
     return render_template("njhshourtracker.html")
 
-
+@app.route("/close")
+def close():
+    return "<script>window.close();</script>"
 @app.route("/login")
 def login():
     try:
@@ -36,7 +38,7 @@ def login():
 
         auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
         # Request authorization URL to open in another window.
-        url = auth.request_authorization("")
+        url = auth.request_authorization("https://NHS.nicholasxwang.repl.co/close")
 
         # Open OAuth authorization webpage. Give time to authorize.
         return render_template("login.html", url = url)
