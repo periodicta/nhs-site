@@ -13,12 +13,7 @@
 
     <div style="text-align:center;">
         <h1>Login with Schoology</h1>
-        <input type="email" placeholder="Email" id="e"><br><br>
-        <input type="password" placeholder="Password" id="p"><br><br>
-        <p>What Grade are you in?</p><br>
-        <input type="number" placeholder="Grade Level" min = "6" max="11"><br><br>
-        <input type="submit"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please Wait..."  value="Log In" id="loginbtn"><br><br>
-
+        <button onclick="newwindow=window.open('{{url}}','Authorize with Schoology','height=200,width=150');">Authorize Schoology</button>
         <span id="resp"></span>
     </div>
 <script>
