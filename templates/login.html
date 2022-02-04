@@ -21,9 +21,6 @@
 
 
         $('#loginbtn').on('click', function() {
-        email = document.getElementById("e").value;
-        password = document.getElementById("p").value;
-        var $this = $(this);
         $this.button('loading');
         setTimeout(function() {
 
@@ -31,8 +28,6 @@
               type: "POST",
               url: "/login",
               data: {
-                "e":email,
-                  "p":password
               }
             });
         request.done(function(data) {
