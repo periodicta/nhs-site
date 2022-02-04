@@ -22,6 +22,7 @@ def njhs_hour_tracker():
 
 @app.route("/close")
 def close():
+    session['token'] = request.args.get("oauth_token")
     return "<script>window.close();</script>"
 @app.route("/login")
 def login():
