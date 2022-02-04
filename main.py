@@ -48,17 +48,22 @@ def login():
 
 @app.route("/login", methods=["POST"])
 def loginpost():
-    user = request.form["e"]
-    password = request.form["p"]
-    from schoology import checkLogin
-    response = checkLogin(user, password)
-    try:
-        if response == "error":
-            return "error!!!"
-    except Exception as t:
-        t = t
-    session["email"] = user
-    session["name"] = response
-    return str(response)
+  import schoolopy, random, time
+  key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+  secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+  sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
+  sc.limit = 10
+
+  auth = 'OAuth realm="Schoology API",'
+  auth += 'oauth_consumer_key="%s",' % key
+  auth += 'oauth_token="%s",' % (session['token'])
+  auth += 'oauth_nonce="%s",' % ''.join([str(random.randint(0, 9)) for i in range(8)])
+  auth += 'oauth_timestamp="%d",' % time.time()
+  auth += 'oauth_signature_method="PLAINTEXT",'
+  auth += 'oauth_version="1.0",'
+  auth += 'oauth_signature="%s%%26%s"' % (secret, '')
+  sc = schoolopy.Schoology(auth)
+  sc.limit = 10
+  return str(sc.get_me().name_display)
 
 app.run(host='0.0.0.0', port=8080)
