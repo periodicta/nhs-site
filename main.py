@@ -6,7 +6,7 @@ app.secret_key = '12345678987654321'
 def home():
     try:
         user = session["name"]
-    except
+    except:
         user = None
 
     return render_template("index.html", user=user)

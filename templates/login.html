@@ -13,9 +13,9 @@
 
     <div style="text-align:center;">
         <h1>Login with Schoology</h1>
-        <button onclick="newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');">Authorize Schoology</button>
+        <button id = "auth" onclick="newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('loginbtn').style.display = 'block';">Authorize Schoology</button>
         <span id="resp"></span>
-        <button id="loginbtn">Login</button>
+        <button style="display:none;" id="loginbtn">Login</button>
     </div>
 <script>
 
