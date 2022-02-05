@@ -13,9 +13,11 @@
 
     <div style="text-align:center;">
         <h1>Login with Schoology</h1>
-        <button id = "auth" onclick="newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('loginbtn').style.display = 'block';">Authorize Schoology</button>
-
+        <br>
+        <button id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!'){location.reload();} newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('loginbtn').style.display = 'block';">Authorize Schoology</button>
+        <br>
         <button style="display:none;" id="loginbtn">Login</button>
+        <br>
         <span id="resp"></span>
     </div>
 <script>
@@ -37,7 +39,7 @@
             resp = document.getElementById("resp")
             if (data==="error!!!"){
                 resp.style.color = "red";
-                resp.innerHTML = "Invalid Credentials";
+                resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!";
                 document.getElementById('auth').style.display = 'block';
                 document.getElementById('loginbtn').style.display = 'none';
 
