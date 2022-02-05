@@ -75,8 +75,9 @@ def loginpost():
                  request_token=request_token, request_token_secret=request_token_secret, access_token=access_token, access_token_secret=access_token_secret)
   print(auth.authorized)
   print(auth.authorize())
-  print(auth.authorized)
-  if (auth.authorized == False):
+  a = auth.authorized
+  print(a)
+  if (a == False):
     return "error!!!"
   sc = schoolopy.Schoology(auth)
   sc.limit = 10
