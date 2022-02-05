@@ -50,7 +50,16 @@ def login():
 
     return redirect("/")
 
-
+@app.route("/logout")
+def logout():
+    session["name"] = None
+    session["email"] = None
+    session['token'] = None
+    session["request_token"] = None
+    session["request_token_secret"] = None
+    session["access_token_secret"] = None
+    session["access_token"] = None
+    return redirect("/")
 @app.route("/login", methods=["POST"])
 def loginpost():
   import schoolopy, random, time

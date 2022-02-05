@@ -39,6 +39,11 @@
       <li class="nav-item ml-3 mr-3 navigationElement" style="color:white !important;">
           <a class="nav-link" href="#" style="color:white !important;">About</a>
       </li>
+      {% if user %}
+      <li class="nav-item ml-3 mr-3 navigationElement" style="color:white !important;">
+          <a class="nav-link" href="/logout" style="color:white !important;">Logout</a>
+      </li>
+      {% endif %}
 
     </ul>
       {% if user %}
