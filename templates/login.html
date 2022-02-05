@@ -14,8 +14,9 @@
     <div style="text-align:center;">
         <h1>Login with Schoology</h1>
         <button id = "auth" onclick="newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('loginbtn').style.display = 'block';">Authorize Schoology</button>
-        <span id="resp"></span>
+
         <button style="display:none;" id="loginbtn">Login</button>
+        <span id="resp"></span>
     </div>
 <script>
 
@@ -36,7 +37,10 @@
             resp = document.getElementById("resp")
             if (data==="error!!!"){
                 resp.style.color = "red";
-                resp.innerHTML = "Invalid Credentials"
+                resp.innerHTML = "Invalid Credentials";
+                document.getElementById('auth').style.display = 'block';
+                document.getElementById('loginbtn').style.display = 'none';
+
             }else{
                 resp.style.color = "green";
                 resp.innerHTML = "Welcome, "+data;

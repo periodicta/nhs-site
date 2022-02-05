@@ -76,6 +76,8 @@ def loginpost():
   print(auth.authorized)
   print(auth.authorize())
   print(auth.authorized)
+  if (auth.authorized == False):
+    return "error!!!"
   sc = schoolopy.Schoology(auth)
   sc.limit = 10
   print(sc.get_me().name_display)
