@@ -6,7 +6,7 @@ app.secret_key = '12345678987654321'
 def home():
     try:
         user = session["name"]
-    except:
+    except
         user = None
 
     return render_template("index.html", user=user)
@@ -40,6 +40,10 @@ def login():
         auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
         # Request authorization URL to open in another window.
         url = auth.request_authorization("https://NHS.nicholasxwang.repl.co/close")
+        session["request_token"] = auth.request_token
+        session["request_token_secret"] = auth.request_token_secret
+        session["access_token_secret"] = auth.access_token_secret
+        session["access_token"] = auth.access_token
 
         # Open OAuth authorization webpage. Give time to authorize.
         return render_template("login.html", url = url)
@@ -54,17 +58,21 @@ def loginpost():
   secret = "59ccaaeb93ba02570b1281e1b0a90e18"
   sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
   sc.limit = 10
-
-  auth = 'OAuth realm="Schoology API",'
-  auth += 'oauth_consumer_key="%s",' % key
-  auth += 'oauth_token="%s",' % (session['token'])
-  auth += 'oauth_nonce="%s",' % ''.join([str(random.randint(0, 9)) for i in range(8)])
-  auth += 'oauth_timestamp="%d",' % time.time()
-  auth += 'oauth_signature_method="PLAINTEXT",'
-  auth += 'oauth_version="1.0",'
-  auth += 'oauth_signature="%s%%26%s"' % (secret, '')
+  request_token = session["request_token"]
+  request_token_secret = session["request_token_secret"]
+  access_token_secret = session["access_token_secret"]
+  access_token = session["access_token"]
+  auth = schoolopy.Auth(key, secret, domain='https://bins.schoology.com', three_legged=True,
+                 request_token=request_token, request_token_secret=request_token_secret, access_token=access_token, access_token_secret=access_token_secret)
+  print(auth.authorized)
+  print(auth.authorize())
+  print(auth.authorized)
   sc = schoolopy.Schoology(auth)
   sc.limit = 10
+  print(sc.get_me().name_display)
+  session["name"] = sc.get_me().name_display
+  session["email"] = sc.get_me().primary_email
+
   return str(sc.get_me().name_display)
 
 app.run(host='0.0.0.0', port=8080)
