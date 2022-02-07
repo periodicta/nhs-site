@@ -39,7 +39,7 @@
             resp = document.getElementById("resp")
             if (data==="error!!!"){
                 resp.style.color = "red";
-                resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!";
+                resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
                 document.getElementById('auth').style.display = 'inline';
                 document.getElementById('loginbtn').style.display = 'none';
 
