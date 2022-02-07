@@ -11,6 +11,40 @@ body{
     margin: 0;
 }
 
+.shinyButton {
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  color: white;
+  background: none;
+  text-decoration: none;
+  border: 1px solid rgb(146, 148, 248);
+  position: relative;
+  overflow: hidden;
+}
+
+.shinyButton:hover {
+  box-shadow: 1px 1px 25px 10px rgba(146, 148, 248, 0.4);
+}
+
+.shinyButton:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(146, 148, 248, 0.4),
+    transparent
+  );
+  transition: all 650ms;
+}
+
+.shinyButton:hover:before {
+  left: 100%;
+}
 .hollowButton {
   background: none;
   color: #ffa260;
@@ -85,20 +119,6 @@ body{
     animation-name: slideIn;
   }
 
-
-/* a{
-    color:orange;
-    font-weight:800;
-    text-decoration: none;
-}
-#navbar{
-    background-color:rgba(0,0,0,0.5);
-    padding-top:20px;
-    padding-bottom:40px;
-    top:0px;
-}
-
-*/
 input{
     color:black;
     background-color:white;

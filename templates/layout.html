@@ -39,15 +39,10 @@
       <li class="nav-item ml-3 mr-3 navigationElement" style="color:white !important;">
           <a class="nav-link" href="#" style="color:white !important;">About</a>
       </li>
-      {% if user %}
-      <li class="nav-item ml-3 mr-3 navigationElement" style="color:white !important;">
-          <a class="nav-link" href="/logout" style="color:white !important;">Logout</a>
-      </li>
-      {% endif %}
 
     </ul>
       {% if user %}
-      <h2>Hello, {{user}}</h2>
+      <a class="nav-link btn btn-outline-success my-2 my-sm-0" href="/logout" style="color:white !important;">Logout</a>
       {% else %}
 
       <a href="/login"><button class="btn btn-outline-success my-2 my-sm-0" >Login</button></a>
