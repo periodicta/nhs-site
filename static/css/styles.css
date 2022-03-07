@@ -11,6 +11,18 @@ body{
     margin: 0;
 }
 
+.navItem {
+  color:white !important;
+}
+
+.navItem:hover {
+  color:#ffa260 !important;
+}
+
+.navDropItem {
+  background-color:#303030;
+  color:white;
+}
 .shinyButton {
   font-size: 1.5rem;
   padding: 1rem 3rem;

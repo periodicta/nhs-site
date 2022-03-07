@@ -1,52 +1,57 @@
-
 <meta charset="UTF-8">
 <title>BISV National Honor Society</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="./static/css/styles.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="./static/css/styles.css">
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #262626;color:white !important;">
   <a class="navbar-brand" href="#" style="color: white !important;">NHS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active ml-3 mr-3 navigationElement">
-        <a class="nav-link" href="/" style="color:white !important;">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link navItem" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
 
 
       <li class="nav-item dropdown ml-3 mr-3 navigationElement">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white !important;">
+        <a class="nav-link dropdown-toggle navItem" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           NHS
         </a>
-        <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown" style="background-color: black;">
-          <a class="dropdown-item" href="#" style="background:black;color:orange;">Upcoming Events</a>
+        <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown"
+          style="background-color: #303030;">
+          <a class="dropdown-item navDropItem" href="#">Upcoming Events</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" style="background:black;color:orange;">Hour Tracker</a>
+          <a class="dropdown-item navDropItem" href="#">Hour Tracker</a>
         </div>
       </li>
 
       <li class="nav-item dropdown ml-3 mr-3 navigationElement">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white !important;">
+        <a class="nav-link dropdown-toggle navItem" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           NJHS
         </a>
-        <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown" style="background-color: black;">
-          <a class="dropdown-item" href="#" style="background:black;color:orange;">Upcoming Events</a>
+        <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown"
+          style="background-color: #303030;">
+          <a class="dropdown-item navDropItem" href="#">Upcoming Events</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" style="background:black;color:orange;">Hour Tracker</a>
+          <a class="dropdown-item navDropItem" href="#">Hour Tracker</a>
         </div>
       </li>
-      <li class="nav-item ml-3 mr-3 navigationElement" style="color:white !important;">
-          <a class="nav-link" href="#" style="color:white !important;">About</a>
+      <li class="nav-item ml-3 mr-3 navigationElement navItem">
+        <a class="nav-link" href="#">About</a>
       </li>
 
     </ul>
-      {% if user %}
-      <a class="nav-link btn btn-outline-success my-2 my-sm-0" href="/logout" style="color:white !important;">Logout</a>
-      {% else %}
+    {% if user %}
+    <a class="nav-link btn btn-outline-success my-2 my-sm-0" href="/logout" style="color:white !important;">Logout</a>
+    {% else %}
 
-      <a href="/login"><button class="btn btn-outline-success my-2 my-sm-0" >Login</button></a>
-      {% endif %}
+    <a href="/login"><button class="btn btn-outline-success my-2 my-sm-0">Login</button></a>
+    {% endif %}
   </div>
 </nav>
 <br><br>
