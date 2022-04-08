@@ -2,38 +2,44 @@
 {% block main %}
 <!DOCTYPE html>
 <html>
+
 <head>
 </head>
+
 <body>
 
-    
 
-<div class="container homePage1" style="background-color:#303030;">
-    <div class="row">
-        <div class="col-lg align-self-start text-center">
-            {% if not user %}
-            <button class="hollowButton" style="margin-bottom: 0.25em;"><strong style="font-size: 1.5em;">Welcome!</strong></button>
-            {% else %}
-            <button class="hollowButton" style="margin-bottom: 0.25em;"><strong style="font-size: 1.5em;">Welcome Back, {{user}}</strong></button>
-            {% endif %}
-            <br>
-            <h3>This is the official NHS/NJHS Website!</h3>
-            <br>
-            <h4> Use your efforts, volunteering, and other activities to help your local communities and organizations. Lend us a hand in our mission to make our communities a better and more productive place.</h4>
-            <br>
-            {% if not user %}
-            <a href="/login"><button class="btn btn-outline-success my-2 my-sm-0"  >Login</button></a>
-            {% endif %}
 
-        </div>
-        <div class="col-lg align-self-start text-center">
-            <img src="./static/images/pickinguptrash.png" alt="">
+    <div class="container homePage1" style="background-color:#303030;">
+        <div class="row">
+            <div class="col-lg align-self-start text-center">
+                {% if not user %}
+                <button class="hollowButton" style="margin-bottom: 0.25em;"><strong
+                        style="font-size: 1.5em;">Welcome!</strong></button>
+                {% else %}
+                <button class="hollowButton" style="margin-bottom: 0.25em;"><strong style="font-size: 1.5em;">Welcome
+                        Back, {{user}}</strong></button>
+                {% endif %}
+                <br>
+                <h3>This is the official NHS/NJHS Website!</h3>
+                <br>
+                <h4> Use your efforts, volunteering, and other activities to help your local communities and
+                    organizations. Lend us a hand in our mission to make our communities a better and more productive
+                    place.</h4>
+                <br>
+                {% if not user %}
+                <a href="/login"><button class="btn btn-outline-success my-2 my-sm-0">Login</button></a>
+                {% endif %}
+
+            </div>
+            <div class="col-lg align-self-start text-center">
+                <img src="./static/images/pickinguptrash.png" alt="">
+            </div>
         </div>
     </div>
-</div>
 
 
-<!-- 
+    <!-- 
     <div style="text-align:center;">
         <h1>BISV National Honor Society</h1>
         <h2>Middle School Student?</h2>
@@ -41,9 +47,7 @@
         <h2>NHS Upcoming Events</h2>
     </div> -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
+
 </html>
 {% endblock %}

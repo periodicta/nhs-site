@@ -1,3 +1,5 @@
+@tailwind
+
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 body{
     /* background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url("https://www.highmarkschools.com/wp-content/uploads/photo-gallery/imported_from_media_libray/CA-BINS-Silicon-Valley-02.jpg?bwg=1562825079") !important; */
@@ -22,6 +24,11 @@ body{
 .navDropItem {
   background-color:#303030;
   color:white;
+}
+
+.navDropItem:hover {
+  color:#ffa260;
+  background-color: #303030;
 }
 .shinyButton {
   font-size: 1.5rem;

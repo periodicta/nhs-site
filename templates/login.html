@@ -2,63 +2,69 @@
 {% block main %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" href="./static/css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
     <div style="text-align:center;">
         <h1>Login with Schoology</h1>
         <br>
-        <button id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('loginbtn').style.display = 'inline';" class="shinyButton">Authorize Schoology</button>
+        <button id="auth"
+            onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{url}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('loginbtn').style.display = 'inline';"
+            class="shinyButton">Authorize Schoology</button>
         <br>
         <button style="display:none;" id="loginbtn" class="shinyButton">Login</button>
         <br>
         <span id="resp"></span>
     </div>
-<script>
+
+    <script>
 
 
-        $('#loginbtn').on('click', function() {
+        $('#loginbtn').on('click', function () {
             var $this = $(this);
-        $this.button('loading');
-        setTimeout(function() {
+            $this.button('loading');
+            setTimeout(function () {
 
-          var request =  $.ajax({
-              type: "POST",
-              url: "/login",
-              data: {
-              }
-            });
-        request.done(function(data) {
-            $this.button('reset');
-            resp = document.getElementById("resp")
-            if (data==="error!!!"){
-                resp.style.color = "red";
-                resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
-                document.getElementById('auth').style.display = 'inline';
-                document.getElementById('loginbtn').style.display = 'none';
+                var request = $.ajax({
+                    type: "POST",
+                    url: "/login",
+                    data: {
+                    }
+                });
+                request.done(function (data) {
+                    $this.button('reset');
+                    resp = document.getElementById("resp")
+                    if (data === "error!!!") {
+                        resp.style.color = "red";
+                        resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
+                        document.getElementById('auth').style.display = 'inline';
+                        document.getElementById('loginbtn').style.display = 'none';
 
-            }else{
-                resp.style.color = "green";
-                resp.innerHTML = "Welcome, "+data;
-                window.location.replace("/");
-            }
+                    } else {
+                        resp.style.color = "green";
+                        resp.innerHTML = "Welcome, " + data;
+                        window.location.replace("/");
+                    }
+
+                });
+
+            }, 1000);
+
+
 
         });
-
-          }, 1000);
-
-
-
-    });
-</script>
+    </script>
 
 </body>
+
 </html>
 
 {% endblock %}
